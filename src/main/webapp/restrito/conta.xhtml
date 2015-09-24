@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html 
+	  xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"
+>
+	
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF--8"/>
+	<title>Cadastro de Contas</title>
+</h:head>
+	<h:body>
+		<h1>Cadastro de contas</h1>
+		<h:form id="edicao">
+			<!-- Aqui entrará o form de cadastro de Contas 7.10 -->
+		</h:form>
+		<h:form id="listagem">
+			<h:dataTable value="#{contaBean.lista}" var="conta" rendered="#{not empty contaBean.lista}">
+				<!-- Aqui serão definidas as colunas da dataTable - Listagem 7.12 -->
+			</h:dataTable>
+		</h:form>		
+	</h:body>
+</html>
