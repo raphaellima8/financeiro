@@ -13,10 +13,61 @@
 		<h1>Cadastro de contas</h1>
 		<h:form id="edicao">
 			<!-- Aqui entrará o form de cadastro de Contas 7.10 -->
+			<h:messages/>
+			<h:inputHidden value="#{contaBean.selecionada.conta}"/>
+			<h:inputHidden value="#{contaBean.selecionada.favorita}"/>
+			<h:panelGrid columns="2">
+				<h:outputLabel value="Descrição: " for="descricao"/>
+				<h:inputText id="descricao" value="#{contaBean.selecionada.descricao}" required="true" maxlength="45"/>
+				<h:outputLabel value="Saldo Inicial: " for="saldoInicial"/>
+				<h:inputText id="saldoInicial" value="#{contaBean.selecionada.saldoInicial}" size="10">
+					<f:convertNumber minFractionDigits="2"/>
+				</h:inputText>
+				<h:commandButton value="Salvar" action="#{contaBean.salvar}">
+					<f:ajax execute="@form" render=":edicao :listagem"/>
+				</h:commandButton>
+			</h:panelGrid>
 		</h:form>
 		<h:form id="listagem">
 			<h:dataTable value="#{contaBean.lista}" var="conta" rendered="#{not empty contaBean.lista}">
 				<!-- Aqui serão definidas as colunas da dataTable - Listagem 7.12 -->
+				<h:column>
+					<f:facet name="header">Descrição</f:facet>
+					#{conta.descricao}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Data Cadastro</f:facet>
+					<h:outputText value="#{conta.dataCadastro}">
+						<f:convertDateTime dateStyle="medium" />
+					</h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Saldo inicial</f:facet>
+					<h:outputText value="#{conta.saldoInicial}" style="text-align: rigth; display: block;">
+						<f:convertNumber minFractionDigits="2"/>
+					</h:outputText>
+				</h:column>
+				<h:column>
+					<h:commandLink action="#{contaBean.tornarFavorita}">
+						<f:ajax execute="@this" render=":listagem"/>
+						<h:graphicImage library="imagens" name="favorita16_#{conta.favorita}.png"/>
+						<f:setPropertyActionListener value="#{conta}" target="#{contaBean.selecionada}"/>
+					</h:commandLink>
+				</h:column>
+				<h:column>
+					<h:commandLink>
+						<f:ajax execute="@this" render=":edicao"/>
+						<h:graphicImage library="imagens" name="editar16.png"/>
+						<f:setPropertyActionListener value="#{conta}" target="#{contaBean.selecionada}"/>
+					</h:commandLink>
+				</h:column>
+				<h:column>
+					<h:commandLink action="#{contaBean.excluir}">
+						<f:ajax execute="@this" render=":listagem"/>
+						<h:graphicImage library="imagens" name="excluir16.png"/>
+						<f:setPropertyActionListener value="#{conta}" target="#{contaBean.selecionada}"/>
+					</h:commandLink>
+				</h:column>
 			</h:dataTable>
 		</h:form>		
 	</h:body>
