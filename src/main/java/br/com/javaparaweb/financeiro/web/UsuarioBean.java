@@ -7,6 +7,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.*;
 import javax.faces.context.FacesContext;
 
+import br.com.javaparaweb.financeiro.conta.Conta;
+import br.com.javaparaweb.financeiro.conta.ContaRN;
 import br.com.javaparaweb.financeiro.usuario.Usuario;
 import br.com.javaparaweb.financeiro.usuario.UsuarioRN;
 
@@ -18,6 +20,7 @@ public class UsuarioBean {
 	private String confimarSenha;
 	private List<Usuario> lista;
 	private String destinoSalvar;
+	private Conta conta = new Conta();
 
 	public String novo(){
 		this.destinoSalvar = "usuariosucesso";
@@ -55,6 +58,13 @@ public class UsuarioBean {
 		
 		UsuarioRN usuarioRN = new UsuarioRN();
 		usuarioRN.salvar(this.usuario);
+		
+		if(this.conta.getDescricao() != null){
+			this.conta.setUsuario(this.usuario);
+			this.conta.setFavorita(true);
+			ContaRN contaRN = new ContaRN();
+			contaRN.salvar(this.conta);
+		}
 		
 		return this.destinoSalvar;
 	}
@@ -108,6 +118,14 @@ public class UsuarioBean {
 
 	public void setConfimarSenha(String confimarSenha) {
 		this.confimarSenha = confimarSenha;
+	}
+
+	public Conta getConta() {
+		return conta;
+	}
+
+	public void setConta(Conta conta) {
+		this.conta = conta;
 	}
 
 }

@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml"  
-      xmlns:h="http://java.sun.com/jsf/html">
-
-<h:head>
-	<title>Cadastro de Usuários</title>
-</h:head>
-<h:body>
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/template/externa.xhtml">
+	<ui:define name="corpo">
 	<h1><h:outputText value="#{usuarioBean.usuario.nome}"/>, seja bem-vindo</h1>
 	Seu cadastro foi efetuado com sucesso.
 	<br/>
 	Clique <a href="login.jsf">aqui</a> para efetuar o login.
-</h:body>
+</ui:define>
+</ui:composition>
 </html>
