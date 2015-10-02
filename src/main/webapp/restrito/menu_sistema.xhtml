@@ -5,7 +5,7 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:sec="http://www.springframework.org/security/facelets/tags">
 <ui:composition>
-	<sec:ifAnyGranted roles="ROLE_USUARIO"> 
+	<sec:ifAnyGranted roles="ROLE_USUARIO, ROLE_ADMINISTRADOR"> 
 		<h:form>
 			<table width="100%">
 			<tr><td>

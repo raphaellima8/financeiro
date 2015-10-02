@@ -12,6 +12,7 @@
 		<property name="hibernate.hbm2ddl.auto">update</property>	
 		<mapping class="br.com.javaparaweb.financeiro.usuario.Usuario"/>
 		<mapping class="br.com.javaparaweb.financeiro.conta.Conta"/>
+		<mapping class="br.com.javaparaweb.financeiro.categoria.Categoria"/>
 	</session-factory>
 
 </hibernate-configuration>

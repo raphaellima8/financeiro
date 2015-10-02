@@ -41,6 +41,13 @@
 			<id>org.springframework.security.taglibs.facelets</id>
 			<url>http://spring-security-facelets-taglib.googlecode.com/svn/repo/</url>
 		</repository>
+		
+		<repository>
+			<id>prime-repo</id>
+			<name>PrimeFaces Maven Repository</name>
+			<url>http://repository.primefaces.org</url>
+			<layout>default</layout>
+		</repository>
 	</repositories>
 
 	<dependencies>
@@ -103,6 +110,13 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>facelets-taglib-jsf20-spring-3</artifactId>
 			<version>0.5</version>
+		</dependency>
+		
+		<!-- Primefaces -->
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>5.0</version>
 		</dependency>
 		
 	</dependencies>	
