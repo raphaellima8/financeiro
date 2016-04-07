@@ -120,28 +120,4 @@ public class Categoria implements Serializable {
 	public void setFilhos(List<Categoria> filhos) {
 		this.filhos = filhos;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
