@@ -14,7 +14,6 @@ import br.com.javaparaweb.financeiro.conta.Conta;
 import br.com.javaparaweb.financeiro.usuario.Usuario;
 
 @Entity
-
 public class Lancamento implements Serializable {
 
 	private static final long serialVersionUID = -2178284473103040750L;
