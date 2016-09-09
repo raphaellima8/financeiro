@@ -4,12 +4,23 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import br.com.javaparaweb.financeiro.categoria.Categoria;
+import br.com.javaparaweb.financeiro.cheque.Cheque;
 import br.com.javaparaweb.financeiro.conta.Conta;
 import br.com.javaparaweb.financeiro.usuario.Usuario;
 
@@ -45,6 +56,9 @@ public class Lancamento implements Serializable {
 
 	@Column(precision = 10, scale = 2)
 	private BigDecimal valor;
+	
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "lancamento")
+	private Cheque cheque;
 	
 	
 	@Override
