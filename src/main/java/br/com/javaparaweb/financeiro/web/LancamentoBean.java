@@ -9,7 +9,7 @@ import br.com.javaparaweb.financeiro.categoria.Categoria;
 import br.com.javaparaweb.financeiro.conta.Conta;
 import br.com.javaparaweb.financeiro.lancamento.*;
 
-@ManagedBean
+@ManagedBean(name = "lancamentoBean")
 @ViewScoped
 public class LancamentoBean implements Serializable {
 
@@ -19,60 +19,66 @@ public class LancamentoBean implements Serializable {
 	private List<Double> saldos;
 	private float saldoGeral;
 	private Lancamento editado = new Lancamento();
-	
-	@ManagedProperty(value="#{contextoBean}")
+
+	@ManagedProperty(value = "#{contextoBean}")
 	private ContextoBean contextoBean;
 
 	public LancamentoBean() {
 		this.novo();
 	}
-	
-	public String novo(){
+
+	public String novo() {
 		this.editado = new Lancamento();
 		this.editado.setData(new Date());
 		return null;
 	}
-	
-	public void editar(){
-		
+
+	public void editar() {
 	}
-	
-	public void salvar(){
+
+	public void salvar() {
 		this.editado.setUsuario(this.contextoBean.getUsuarioLogado());
 		this.editado.setConta(this.contextoBean.getContaAtiva());
+
 		LancamentoRN lancamentoRN = new LancamentoRN();
 		lancamentoRN.salvar(this.editado);
+
 		this.novo();
 		this.lista = null;
 	}
-	
-	public void excluir(){
+
+	public void excluir() {
 		LancamentoRN lancamentoRN = new LancamentoRN();
 		lancamentoRN.excluir(this.editado);
 		this.lista = null;
 	}
-	
-	public List<Lancamento> getLista(){
-		if (this.lista == null || this.conta != this.contextoBean.getContaAtiva()) {
+
+	public List<Lancamento> getLista() {
+		if (this.lista == null
+				|| this.conta != this.contextoBean.getContaAtiva()) {
 			this.conta = this.contextoBean.getContaAtiva();
-			
+
 			Calendar dataSaldo = new GregorianCalendar();
 			dataSaldo.add(Calendar.MONTH, -1);
 			dataSaldo.add(Calendar.DAY_OF_MONTH, -1);
-			
+
 			Calendar inicio = new GregorianCalendar();
 			inicio.add(Calendar.MONTH, -1);
-			
+
 			LancamentoRN lancamentoRN = new LancamentoRN();
-			this.saldoGeral = lancamentoRN.saldo(this.conta, dataSaldo.getTime());
-			this.lista = lancamentoRN.listar(this.conta, inicio.getTime(), null);
-			
+			this.saldoGeral = lancamentoRN.saldo(this.conta,
+					dataSaldo.getTime());
+			this.lista = lancamentoRN
+					.listar(this.conta, inicio.getTime(), null);
+
 			Categoria categoria = null;
 			double saldo = this.saldoGeral;
 			this.saldos = new ArrayList<Double>();
 			for (Lancamento lancamento : this.lista) {
 				categoria = lancamento.getCategoria();
-				saldo = saldo + (lancamento.getValor().floatValue() * categoria.getFator());
+				saldo = saldo
+						+ (lancamento.getValor().floatValue() * categoria
+								.getFator());
 				this.saldos.add(saldo);
 			}
 		}
@@ -122,5 +128,4 @@ public class LancamentoBean implements Serializable {
 	public void setLista(List<Lancamento> lista) {
 		this.lista = lista;
 	}
-	
 }
