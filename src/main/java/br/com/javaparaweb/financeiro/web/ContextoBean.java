@@ -2,6 +2,7 @@ package br.com.javaparaweb.financeiro.web;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Locale;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -21,6 +22,7 @@ public class ContextoBean implements Serializable {
 	private static final long serialVersionUID = 4693275947797122717L;
 
 	private int codigoContaAtiva = 0;
+	private List<Locale> idiomas;
 	
 	public Usuario getUsuarioLogado(){
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -28,7 +30,11 @@ public class ContextoBean implements Serializable {
 		String login = external.getRemoteUser();
 		if(login != null){
 			UsuarioRN usuarioRN = new UsuarioRN();
-			return usuarioRN.buscarPorLogin(login);
+			Usuario usuario = usuarioRN.buscarPorLogin(login);
+			String[] info = usuario.getIdioma().split("_");
+			Locale locale = new Locale(info[0], info[1]);
+			context.getViewRoot().setLocale(locale);
+			return usuario;
 		}
 		return null;
 	}
