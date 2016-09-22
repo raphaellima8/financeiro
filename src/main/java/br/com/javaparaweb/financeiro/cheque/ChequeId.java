@@ -1,3 +1,4 @@
+
 package br.com.javaparaweb.financeiro.cheque;
 
 import java.io.Serializable;
@@ -5,25 +6,40 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Embeddable
-public class ChequeId implements Serializable{
+public class ChequeId implements Serializable {
 
 	private static final long serialVersionUID = -5175633745045963826L;
 
 	@Basic(optional = false)
 	@Column(name = "cheque", nullable = false)
 	private Integer cheque;
-	
+
 	@Basic(optional = false)
 	@Column(name = "conta", nullable = false)
 	private Integer conta;
 
-	public ChequeId(Integer cheque, Integer conta) {
-		this.cheque = cheque;
+	public ChequeId(Integer conta, Integer cheque) {
 		this.conta = conta;
+		this.cheque = cheque;
 	}
-	
-	public ChequeId(){
-		
+
+	public ChequeId() {
+	}
+
+	public Integer getCheque() {
+		return cheque;
+	}
+
+	public void setCheque(Integer cheque) {
+		this.cheque = cheque;
+	}
+
+	public Integer getConta() {
+		return conta;
+	}
+
+	public void setConta(Integer conta) {
+		this.conta = conta;
 	}
 
 	@Override
@@ -57,19 +73,4 @@ public class ChequeId implements Serializable{
 		return true;
 	}
 
-	public Integer getCheque() {
-		return cheque;
-	}
-
-	public void setCheque(Integer cheque) {
-		this.cheque = cheque;
-	}
-
-	public Integer getConta() {
-		return conta;
-	}
-
-	public void setConta(Integer conta) {
-		this.conta = conta;
-	}
 }

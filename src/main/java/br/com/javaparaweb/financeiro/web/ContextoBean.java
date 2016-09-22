@@ -1,6 +1,8 @@
 package br.com.javaparaweb.financeiro.web;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
@@ -37,6 +39,27 @@ public class ContextoBean implements Serializable {
 			return usuario;
 		}
 		return null;
+	}
+	
+	public List<Locale> getIdiomas(){
+		FacesContext context = FacesContext.getCurrentInstance();
+		Iterator<Locale> locales = context.getApplication().getSupportedLocales();
+		this.idiomas = new ArrayList<Locale>();
+		while (locales.hasNext()) {
+			this.idiomas.add(locales.next());
+		}
+		return this.idiomas;
+	}
+	
+	public void setIdiomaUsuario(String idioma){
+		Usuario usuario = this.getUsuarioLogado();
+		usuario.setIdioma(idioma);
+		UsuarioRN usuarioRN = new UsuarioRN();
+		usuarioRN.salvar(usuario);
+		String[] info = idioma.split("_");
+		Locale locale = new Locale(info[0], info[1]);
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.getViewRoot().setLocale(locale);
 	}
 	
 	public Conta getContaAtiva(){

@@ -4,7 +4,7 @@
       xmlns:h="http://java.sun.com/jsf/html"  
       xmlns:f="http://java.sun.com/jsf/core">
 
-<ui:composition template="/template/interna.xhmtl">
+<ui:composition template="/template/interna.xhtml">
 	<ui:define name="titulo">
 		#{msg.cheque_titulo}
 	</ui:define>
@@ -24,7 +24,7 @@
 			<h:panelGrid columns="2">
 				<h:outputLabel value="#{msg.cheque_numero_inicial}" for="chequeInicial" />
 				<h:inputText id="chequeInicial" value="#{chequeBean.chequeInicial}" maxlength="6" size="6"/>
-				<h:outputLabel value="#{msg.cheque_numero_final" for="chequeFinal"/>
+				<h:outputLabel value="#{msg.cheque_numero_final}" for="chequeFinal"/>
 				<h:inputText id="chequeFinal" value="#{chequeBean.chequeFinal}" maxlength="6" size="6" />
 				<h:commandButton value="#{msg.cheque_botao_salvar}" action="#{chequeBean.salvar}">
 					<f:ajax execute="@form" render=":listagem :edicao" />

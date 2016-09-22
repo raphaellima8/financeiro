@@ -11,6 +11,7 @@ import javax.faces.context.FacesContext;
 import br.com.javaparaweb.financeiro.cheque.Cheque;
 import br.com.javaparaweb.financeiro.cheque.ChequeRN;
 import br.com.javaparaweb.financeiro.conta.Conta;
+import br.com.javaparaweb.financeiro.util.MensagemUtil;
 import br.com.javaparaweb.financeiro.util.RNException;
 
 @ManagedBean(name = "chequeBean")

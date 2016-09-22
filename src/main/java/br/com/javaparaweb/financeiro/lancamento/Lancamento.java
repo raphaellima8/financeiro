@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -176,6 +177,13 @@ public class Lancamento implements Serializable {
 
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;
+	}
+	
+	public Cheque getCheque() {
+		return cheque;
+	}
+	public void setCheque(Cheque cheque) {
+		this.cheque = cheque;
 	}
 	
 }
